@@ -70,10 +70,11 @@ export default class SearchResults extends Component {
                 (
                 <tr key={show.show.id}>
                 <td>{show.show.name}</td>
+                {(favourites.indexOf(show.show.name)>-1)? <td className="btn btn-success">Favourite</td>: <td className="btn btn-danger">No Favourite</td>}
                 <td>
                 <button onClick={this._favourite.bind(null, show.show.name)} className="btn btn-sm btn-info">Favourite</button>
                 </td>
-                {(favourites.indexOf(show.show.name)>-1)? <td className="btn btn-success">Favourite</td>: <td className="btn btn-danger">No Favourite</td>}
+                <button onClick={this._unfavourite.bind(null, show.show.name)} className="btn btn-sm btn-warning">unfavourite</button>
                 </tr>
                 ))}
               </tbody>
