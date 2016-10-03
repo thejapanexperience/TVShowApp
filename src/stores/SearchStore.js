@@ -4,6 +4,8 @@ import Storage from '../Storage';
 
 
 let _results = Storage.read('results') || [];
+let _favourites = Storage.read('_favourites') || [];
+
 
 
 class SearchStore extends EventEmitter {
@@ -17,6 +19,15 @@ class SearchStore extends EventEmitter {
           console.log('SearchStore _results: ', _results)
           this.emit('CHANGE')
           break;
+
+          case 'FAVOURITE':
+            console.log(action.payload.name);
+            let newName = action.payload.name
+            console.log(newName);
+            _favourites.push(newName);
+            console.log('DetailStore _favourites', _favourites)
+            this.emit('CHANGE')
+            break;
       }
     })
 
@@ -35,6 +46,7 @@ class SearchStore extends EventEmitter {
 
   get() {
     return _results;
+    return _favourites;
   }
 }
 
