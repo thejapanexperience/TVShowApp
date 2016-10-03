@@ -20,6 +20,9 @@ export default class Layout extends Component {
           <li role="presentation" className={classNames({active: path === '/search'})}>
             <Link to='/search'>Search</Link>
           </li>
+          <li role="presentation" className={classNames({active: path === '/favourites'})}>
+            <Link to='/favourites'>Favourites</Link>
+          </li>
         </ul>
 
         {this.props.children}

@@ -4,7 +4,7 @@ import Storage from '../Storage';
 
 
 let _results = Storage.read('results') || [];
-let _favourites = Storage.read('_favourites') || [];
+let _favourites = Storage.read('favourites') || [];
 
 
 
@@ -23,9 +23,17 @@ class SearchStore extends EventEmitter {
           case 'FAVOURITE':
             console.log(action.payload.name);
             let newName = action.payload.name
-            console.log(newName);
             _favourites.push(newName);
-            console.log('DetailStore _favourites', _favourites)
+            this.emit('CHANGE')
+            break;
+
+          case 'UNFAVOURITE':
+            console.log('unfavourite in store');
+            console.log(action.payload.name)
+            console.log(_favourites)
+            let toDelete = _favourites.indexOf(action.payload.name)
+            console.log(toDelete)
+            _favourites.splice(toDelete,1)
             this.emit('CHANGE')
             break;
       }
@@ -33,6 +41,7 @@ class SearchStore extends EventEmitter {
 
     this.on('CHANGE',() => {
       Storage.write('results', _results)
+      Storage.write('favourites', _favourites)
     })
   }
 
@@ -46,6 +55,8 @@ class SearchStore extends EventEmitter {
 
   get() {
     return _results;
+  }
+  getFavourites() {
     return _favourites;
   }
 }

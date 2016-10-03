@@ -12,9 +12,15 @@ const MovieActions = {
   },
 
   favourite(name) {
-    console.log('MovieActions name; ',name)
     AppDispatcher.dispatch({
       type: 'FAVOURITE',
+      payload: { name }
+    })
+  },
+
+  unfavourite(name) {
+    AppDispatcher.dispatch({
+      type: 'UNFAVOURITE',
       payload: { name }
     })
   },

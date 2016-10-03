@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import Layout from './components/Layout'
 import SearchPage from './components/SearchPage'
-import DetailPage from './components/DetailPage'
+import FavouritesPage from './components/FavouritesPage'
 
 render(
   <Router history={browserHistory}>
@@ -12,7 +12,7 @@ render(
     <Route path='/' component={Layout}>
 
       <Route path='/search' component={SearchPage}/>
-      <Route path='/details/:id' component={DetailPage}/>
+      <Route path='/favourites' component={FavouritesPage}/>
 
     </Route>
 

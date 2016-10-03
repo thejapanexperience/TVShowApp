@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import SearchStore from '../stores/SearchStore'
-import DetailStore from '../stores/DetailStore'
 import MovieActions from '../actions/MovieActions'
 import { browserHistory } from 'react-router'
 
@@ -11,11 +10,12 @@ export default class SearchResults extends Component {
 
     this.state = {
       results: SearchStore.get(),
-      results: DetailStore.get()
+      favourites: SearchStore.getFavourites()
     }
 
     this._onChange = this._onChange.bind(this);
     this._favourite = this._favourite.bind(this);
+    this._unfavourite = this._unfavourite.bind(this);
     // this._selectTitle = this._selectTitle.bind(this);
 
   }
@@ -31,7 +31,7 @@ export default class SearchResults extends Component {
   _onChange() {
     this.setState({
       results: SearchStore.get(),
-      favourites: DetailStore.get()
+      favourites: SearchStore.getFavourites()
     })
   }
 
@@ -39,21 +39,21 @@ export default class SearchResults extends Component {
     MovieActions.favourite(name)
   }
 
+  _unfavourite(name) {
+    MovieActions.unfavourite(name)
+  }
+
   render() {
 
 
     let { results, favourites } = this.state;
+    console.log(favourites)
     let strFavourites=""
-
     if (favourites){
-      strFavourites = favourites.toString()
-      console.log('strFavourites', strFavourites)
+      strFavourites = favourites
     } else {
       strFavourites = "there's no favourites"
     }
-    console.log('SearchResults results : ', results)
-    console.log('Favourites in search results', favourites, strFavourites)
-
 
 
     if(results.length>0){
@@ -73,11 +73,10 @@ export default class SearchResults extends Component {
                 <td>
                 <button onClick={this._favourite.bind(null, show.show.name)} className="btn btn-sm btn-info">Favourite</button>
                 </td>
+                {(favourites.indexOf(show.show.name)>-1)? <td>Favourite</td>: <td>No Favourite</td>}
+                <button onClick={this._unfavourite.bind(null, show.show.name)} className="btn btn-sm btn-warning">unfavourite</button>
                 </tr>
                 ))}
-                <tr>
-                  <td>{favourites}</td>
-                </tr>
               </tbody>
           </table>
 
