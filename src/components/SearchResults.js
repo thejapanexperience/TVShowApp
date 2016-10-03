@@ -73,8 +73,7 @@ export default class SearchResults extends Component {
                 <td>
                 <button onClick={this._favourite.bind(null, show.show.name)} className="btn btn-sm btn-info">Favourite</button>
                 </td>
-                {(favourites.indexOf(show.show.name)>-1)? <td>Favourite</td>: <td>No Favourite</td>}
-                <button onClick={this._unfavourite.bind(null, show.show.name)} className="btn btn-sm btn-warning">unfavourite</button>
+                {(favourites.indexOf(show.show.name)>-1)? <td className="btn btn-success">Favourite</td>: <td className="btn btn-danger">No Favourite</td>}
                 </tr>
                 ))}
               </tbody>
