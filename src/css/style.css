@@ -1,3 +1,7 @@
 table.table.table-hover tr {
   cursor: pointer;
 }
+
+.favouriteName {
+  width: 400px;
+}

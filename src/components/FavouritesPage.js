@@ -44,7 +44,7 @@ export default class FavouritesPage extends Component {
       {favourites.map((favourite) =>
         (
         <tr key={favourite}>
-        <td>{favourite}</td>
+        <td className="favouriteName btn btn-info">{favourite}</td>
         <td>
         </td>
         <td><button onClick={this._unfavourite.bind(null, favourite)} className="btn btn-sm btn-warning">unfavourite</button></td>
